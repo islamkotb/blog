@@ -3,10 +3,17 @@ class CommentsController < ApplicationController
 
   # GET /comments
   # GET /comments.json
-  def index
-    @comments = Comment.all
-  end
-
+  #def index
+   # @comments = Comment.all
+  #end
+def index
+   begin
+      post = Post.find(params[:post_id]) #try catch otherwise localhost/comments raises an error
+      @comments = post.comments
+   rescue
+      @comments = Comment.all
+   end
+ end
   # GET /comments/1
   # GET /comments/1.json
   def show
